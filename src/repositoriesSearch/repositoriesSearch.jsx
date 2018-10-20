@@ -7,8 +7,9 @@ import {Loader} from "../common/components/loader";
 import {Error} from "../common/components/error";
 import Waypoint from 'react-waypoint';
 import {SearchResults} from "./components/repositoriesSearchResults/repositoriesSearchResults";
+import {SearchFilter} from './searchFilter/searchFilter';
 
-export class RepositoriesSearchComponent extends React.Component {
+class RepositoriesSearchComponent extends React.Component {
 
     static propTypes = {
         search: PropTypes.func.isRequired,
@@ -25,6 +26,9 @@ export class RepositoriesSearchComponent extends React.Component {
         const {isLoading, error} = this.props;
         return (
             <div>
+                <SearchFilter
+                    onSearchButtonClick={this.onSearchButtonClick}
+                />
                 <SearchResults/>
                 {
                     this.shouldRenderWaypoint() && <Waypoint
@@ -54,6 +58,10 @@ export class RepositoriesSearchComponent extends React.Component {
         const page = Math.ceil(itemsCount / ITEMS_PER_PAGE) + 1;
         search(page);
     };
+
+    onSearchButtonClick = () => {
+        this.props.search(1);
+    }
 
 }
 

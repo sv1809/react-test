@@ -26,10 +26,20 @@ describe('repositories.helper', () => {
 
     describe('getSearchRequestQuery', () => {
 
-        test('should return "?sort=stars&q=created:>2018-09-20&page=${page}&per_page=100"', () => {
+        test('should return "?sort=stars&page=${page}&per_page=10&q=created:>2018-09-20"', () => {
             const page = 4;
-            const expected = `?sort=stars&q=created:>2018-09-20&page=${page}&per_page=100`;
-            const actual = getSearchRequestQuery(page);
+            const expected = `?sort=stars&page=${page}&per_page=100&q=created:>2018-09-20`;
+            const actual = getSearchRequestQuery(page, {});
+            expect(actual).toBe(expected);
+        });
+
+        test('should add license to query string if it is not undefined', () => {
+            const page = 4;
+            const license = 'licenseType';
+
+            const expected = `?sort=stars&page=${page}&per_page=100&q=created:>2018-09-20 license:${license}`;
+
+            const actual = getSearchRequestQuery(page, {license});
             expect(actual).toBe(expected);
         });
 

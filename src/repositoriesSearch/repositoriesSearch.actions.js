@@ -23,10 +23,10 @@ const repositoriesSearchFailed = error => ({
     payload: error,
 });
 
-export const repositoriesSearch = page => dispatch => {
+export const repositoriesSearch = page => (dispatch, getState) => {
     const isNewSearch = page === 1 || page === undefined;
     dispatch(repositoriesSearchStarted(isNewSearch));
-    const apiUrl = `/search/repositories${getSearchRequestQuery(page)}`;
+    const apiUrl = `/search/repositories${getSearchRequestQuery(page, getState().repositoriesSearchFilter)}`;
     return fetchData(apiUrl)
         .then(response => response.json())
         .then(repositoriesSearchDeserializer)

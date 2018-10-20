@@ -6,6 +6,10 @@ export function getDateForRequest() {
     return date.toISOString().split('T')[0];
 }
 
-export function getSearchRequestQuery(page) {
-    return `?sort=stars&q=created:>${getDateForRequest()}&page=${page}&per_page=${ITEMS_PER_PAGE}`;
+export function getSearchRequestQuery(page, filter) {
+    let result = `?sort=stars&page=${page}&per_page=${ITEMS_PER_PAGE}&q=created:>${getDateForRequest()}`;
+    if (filter.license !== undefined) {
+        result += ` license:${filter.license}`
+    }
+    return result;
 }
