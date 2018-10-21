@@ -18,10 +18,6 @@ class RepositoriesSearchComponent extends React.Component {
         total: PropTypes.number.isRequired,
     };
 
-    componentDidMount() {
-        this.props.search(1);
-    }
-
     render() {
         const {isLoading, error} = this.props;
         return (
