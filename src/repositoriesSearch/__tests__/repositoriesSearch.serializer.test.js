@@ -6,7 +6,7 @@ jest.mock('../../repository/repository.serializer');
 const repository = {
     name: 'repository name',
 };
-repositoryDeserializer.mockImplementation(() => repository);
+repositoryDeserializer.mockReturnValue(repository);
 
 describe('repositoriesSearch.serializer', () => {
 

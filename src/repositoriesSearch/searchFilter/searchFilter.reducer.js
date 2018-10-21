@@ -1,7 +1,8 @@
-import {SET_SEARCH_FILTER_LICENSE} from './searchFilter.actions';
+import {SET_SEARCH_FILTER_LICENSE, SET_SEARCH_FILTER_REPOSITORY_NAME} from './searchFilter.actions';
 
 export const searchFilterInitialState = {
     license: undefined,
+    repositoryName: undefined,
 };
 
 export function searchFilterReducer(state = searchFilterInitialState, action) {
@@ -10,6 +11,11 @@ export function searchFilterReducer(state = searchFilterInitialState, action) {
             return {
                 ...state,
                 license: action.payload,
+            };
+        case SET_SEARCH_FILTER_REPOSITORY_NAME:
+            return {
+                ...state,
+                repositoryName: action.payload,
             };
         default:
             return state;
